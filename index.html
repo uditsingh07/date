@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Special Question... 💖</title>
-  <!-- Heart Favicon to prevent 404 console warnings -->
+  <!-- Heart Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
   <style>
     * {
@@ -124,7 +124,6 @@
       display: inline-flex;
       align-items: center;
       position: absolute;
-      /* Smooth walking transition across screen */
       transition: left 0.8s cubic-bezier(0.25, 1, 0.5, 1), top 0.8s cubic-bezier(0.25, 1, 0.5, 1);
       z-index: 20;
       cursor: pointer;
@@ -145,7 +144,6 @@
       transition: transform 0.2s ease;
     }
 
-    /* Walking/Waddling animation triggered during movement */
     .is-walking .pulling-elephant {
       animation: walkWaddle 0.2s infinite alternate ease-in-out;
     }
@@ -221,11 +219,9 @@
   <div id="step1" class="card">
     <div class="svg-container">
       <svg class="bounce-dance" width="130" height="130" viewBox="0 0 100 100">
-        <!-- Stem & Leaves -->
         <path d="M50,90 Q48,65 50,55" stroke="#2e7d32" stroke-width="4" fill="none"/>
         <path d="M50,75 Q35,70 30,78 Q42,85 50,75" fill="#4caf50"/>
         <path d="M50,70 Q65,65 70,73 Q58,80 50,70" fill="#4caf50"/>
-        <!-- Petals -->
         <g fill="#ffca28">
           <ellipse cx="50" cy="20" rx="6" ry="14"/>
           <ellipse cx="50" cy="80" rx="6" ry="14"/>
@@ -236,15 +232,12 @@
           <ellipse cx="71" cy="29" rx="7" ry="14" transform="rotate(45 71 29)"/>
           <ellipse cx="29" cy="71" rx="7" ry="14" transform="rotate(45 29 71)"/>
         </g>
-        <!-- Center Face -->
         <circle cx="50" cy="50" r="18" fill="#6d4c41"/>
-        <!-- Eyes & Smile -->
         <circle cx="43" cy="47" r="2.5" fill="#fff"/>
         <circle cx="57" cy="47" r="2.5" fill="#fff"/>
         <circle cx="43" cy="47" r="1.2" fill="#000"/>
         <circle cx="57" cy="47" r="1.2" fill="#000"/>
         <path d="M44,53 Q50,58 56,53" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <!-- Cheeks -->
         <circle cx="40" cy="52" r="2" fill="#ff8a80" opacity="0.6"/>
         <circle cx="60" cy="52" r="2" fill="#ff8a80" opacity="0.6"/>
       </svg>
@@ -258,25 +251,19 @@
   <div id="step2" class="card hidden">
     <div class="svg-container">
       <svg class="bounce-dance" width="130" height="130" viewBox="0 0 100 100">
-        <!-- Ears -->
         <circle cx="28" cy="45" r="18" fill="#b0bec5"/>
         <circle cx="72" cy="45" r="18" fill="#b0bec5"/>
         <circle cx="28" cy="45" r="11" fill="#cfd8dc"/>
         <circle cx="72" cy="45" r="11" fill="#cfd8dc"/>
-        <!-- Head & Body -->
         <ellipse cx="50" cy="65" rx="22" ry="18" fill="#90a4ae"/>
         <circle cx="50" cy="48" r="22" fill="#b0bec5"/>
-        <!-- Eyes -->
         <circle cx="42" cy="44" r="2.5" fill="#000"/>
         <circle cx="58" cy="44" r="2.5" fill="#000"/>
         <circle cx="43" cy="43" r="0.8" fill="#fff"/>
         <circle cx="59" cy="43" r="0.8" fill="#fff"/>
-        <!-- Cheeks -->
         <circle cx="36" cy="49" r="3" fill="#ffab91"/>
         <circle cx="64" cy="49" r="3" fill="#ffab91"/>
-        <!-- Trunk -->
         <path class="wave-trunk" d="M47,52 Q40,65 30,55 Q25,50 32,48" stroke="#b0bec5" stroke-width="7" fill="none" stroke-linecap="round"/>
-        <!-- Heart above elephant -->
         <path d="M50,18 C45,10 35,15 42,24 L50,30 L58,24 C65,15 55,10 50,18 Z" fill="#ff4081"/>
       </svg>
     </div>
@@ -284,8 +271,6 @@
     <p>Grab your favorite drink/snack, get cozy, and let's hang out virtually!</p>
     <div class="btn-container" id="proposalBtns">
       <button id="yesBtn" onclick="nextStep(3)">YES! 💖</button>
-      
-      <!-- Elephant Pulling No Button with a Rope -->
       <div id="noWrapper" onmouseover="moveNoButton()" onclick="moveNoButton()">
         <span class="pulling-elephant">🐘</span>
         <span class="rope">---🪢---</span>
@@ -294,25 +279,20 @@
     </div>
   </div>
 
-  <!-- STEP 3: "I Knew It!" + Pick Date/Time -->
+  <!-- STEP 3: Pick Date/Time -->
   <div id="step3" class="card hidden">
     <div class="svg-container">
       <svg class="bounce-dance" width="130" height="130" viewBox="0 0 100 100">
-        <!-- Bear Head -->
         <circle cx="50" cy="50" r="30" fill="#a1887f"/>
-        <!-- Ears -->
         <circle cx="28" cy="28" r="10" fill="#a1887f"/>
         <circle cx="72" cy="28" r="10" fill="#a1887f"/>
         <circle cx="28" cy="28" r="5" fill="#d7ccc8"/>
         <circle cx="72" cy="28" r="5" fill="#d7ccc8"/>
-        <!-- Snout -->
         <ellipse cx="50" cy="58" rx="12" ry="9" fill="#d7ccc8"/>
         <ellipse cx="50" cy="54" rx="4" ry="3" fill="#4e342e"/>
         <path d="M50,57 L50,61 M46,61 Q50,65 54,61" stroke="#4e342e" stroke-width="1.8" fill="none"/>
-        <!-- Eyes -->
         <circle cx="38" cy="45" r="3" fill="#000"/>
         <circle cx="62" cy="45" r="3" fill="#000"/>
-        <!-- Cheeks -->
         <circle cx="33" cy="52" r="3.5" fill="#ff8a80" opacity="0.6"/>
         <circle cx="67" cy="52" r="3.5" fill="#ff8a80" opacity="0.6"/>
       </svg>
@@ -323,11 +303,10 @@
     <button onclick="finishDateSelection()">Lock it in! 🔒</button>
   </div>
 
-  <!-- STEP 4: Final Sweet Words -->
+  <!-- STEP 4: Final Screen -->
   <div id="step4" class="card hidden">
     <div class="svg-container">
       <svg width="130" height="130" viewBox="0 0 100 100">
-        <!-- Giant Pulsing Heart -->
         <path class="bounce-dance" d="M50,30 C35,10 10,25 25,50 L50,80 L75,50 C90,25 65,10 50,30 Z" fill="#ff416c"/>
         <path d="M40,28 C35,22 28,25 32,33" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
       </svg>
@@ -339,7 +318,6 @@
   <script>
     let yesButtonScale = 1;
 
-    // Generate Floating Doodles
     const doodleTypes = ['✨', '🌸', '💖', '⭐', '🎀', '🧸', '🌷', '🤍', '🌙'];
     function createDoodles() {
       const container = document.getElementById('doodleContainer');
@@ -375,38 +353,28 @@
       const yesBtn = document.getElementById('yesBtn');
       const elephant = document.querySelector('.pulling-elephant');
 
-      // Expand Yes Button
       yesButtonScale += 0.2;
       yesBtn.style.transform = `scale(${yesButtonScale})`;
 
-      // Get current position
       const rect = noWrapper.getBoundingClientRect();
       const currentX = rect.left;
 
-      // Calculate target random position within screen bounds
       const newX = Math.random() * (window.innerWidth - noWrapper.offsetWidth - 60);
       const newY = Math.random() * (window.innerHeight - noWrapper.offsetHeight - 60);
 
-      // Determine walking direction (left or right)
       if (newX > currentX) {
-        // Moving Right: Elephant leads on the right, pulling button on left
         noWrapper.style.flexDirection = 'row-reverse';
-        elephant.style.setProperty('--dir', '-1'); // Face right
+        elephant.style.setProperty('--dir', '-1');
       } else {
-        // Moving Left: Elephant leads on the left, pulling button on right
         noWrapper.style.flexDirection = 'row';
-        elephant.style.setProperty('--dir', '1'); // Face left
+        elephant.style.setProperty('--dir', '1');
       }
 
-      // Add walking animation class
       noWrapper.classList.add('is-walking');
-
-      // Trigger smooth gliding movement
       noWrapper.style.position = 'fixed';
       noWrapper.style.left = `${newX}px`;
       noWrapper.style.top = `${newY}px`;
 
-      // Remove walking animation once elephant reaches its destination (0.8s)
       setTimeout(() => {
         noWrapper.classList.remove('is-walking');
       }, 800);
@@ -424,26 +392,15 @@
         timeStyle: 'short'
       });
 
-      // 1. Send Formspree Request in background
-      fetch("https://formspree.io/f/meeyynon", {
+      // Silently post response directly into Google Sheets
+      fetch("https://script.google.com/macros/s/AKfycbzb81OlL5Ms70nEARPQIK2rjCVHFwCAIiZMddaXto6cb8i9I1fLXk8wYwNbADsqKAr1/exec", {
         method: "POST",
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          recipient: "tijari7246@davopa.com",
-          message: "She responded to your date invite! 🎉",
-          selected_date: formattedDate
-        })
+        mode: "no-cors",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ selected_date: formattedDate })
       });
 
-      // 2. Open Her Mail Client Pre-filled directly to your email
-      const subject = encodeURIComponent("I set a date for us! 🎉");
-      const body = encodeURIComponent(`Hey! I selected this date and time for our virtual movie date: ${formattedDate} ❤️`);
-      window.location.href = `mailto:pirahip467@copawoke.com?subject=${subject}&body=${body}`;
-
-      // 3. Display final success screen
+      // Display final success screen directly inside browser
       document.getElementById('finalMessage').innerHTML = 
         `Mark your calendar for <strong>${formattedDate}</strong>! <br><br>` +
         `Now that it's set, I'm just genuinely excited to hang out with you. You're always such a comfort to be around. Can't wait for our date! ❤️`;
