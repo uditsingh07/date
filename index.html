@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Special Question... 💖</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Floating Doodles Background */
+    .doodle-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .doodle {
+      position: absolute;
+      font-size: 1.5rem;
+      user-select: none;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.98);
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h2 {
+      color: #ff4b2b;
+      margin-bottom: 15px;
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    p {
+      color: #333333;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+      position: relative;
+      min-height: 60px;
+    }
+
+    button {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 65, 108, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 65, 108, 0.4);
+    }
+
+    /* Pulling Elephant + Rope + No Button Wrapper */
+    #noWrapper {
+      display: inline-flex;
+      align-items: center;
+      position: absolute;
+      /* Smooth walking transition across screen */
+      transition: left 0.8s cubic-bezier(0.25, 1, 0.5, 1), top 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      z-index: 20;
+      cursor: pointer;
+    }
+
+    #noBtn {
+      background: #718093;
+      box-shadow: none;
+      padding: 10px 20px;
+    }
+
+    .pulling-elephant {
+      font-size: 2.2rem;
+      user-select: none;
+      display: inline-block;
+      --dir: 1;
+      transform: scaleX(var(--dir));
+      transition: transform 0.2s ease;
+    }
+
+    /* Walking/Waddling animation triggered during movement */
+    .is-walking .pulling-elephant {
+      animation: walkWaddle 0.2s infinite alternate ease-in-out;
+    }
+
+    @keyframes walkWaddle {
+      0% { transform: scaleX(var(--dir)) translateY(0) rotate(-10deg); }
+      100% { transform: scaleX(var(--dir)) translateY(-6px) rotate(10deg); }
+    }
+
+    .rope {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #8d6e63;
+      margin: 0 -2px;
+      user-select: none;
+      letter-spacing: -2px;
+    }
+
+    #yesBtn {
+      position: relative;
+      z-index: 10;
+    }
+
+    input[type="datetime-local"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ff416c;
+      border-radius: 10px;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .svg-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    /* SVG Animations */
+    .bounce-dance {
+      animation: dance 1.2s ease-in-out infinite alternate;
+      transform-origin: bottom center;
+    }
+
+    @keyframes dance {
+      0% { transform: rotate(-8deg) translateY(0); }
+      100% { transform: rotate(8deg) translateY(-8px); }
+    }
+
+    .wave-trunk {
+      animation: wave 1.5s ease-in-out infinite alternate;
+      transform-origin: 35px 55px;
+    }
+
+    @keyframes wave {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-15deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Doodles Container -->
+  <div class="doodle-container" id="doodleContainer"></div>
+
+  <!-- STEP 1: Good Words (Dancing Sunflower) -->
+  <div id="step1" class="card">
+    <div class="svg-container">
+      <svg class="bounce-dance" width="130" height="130" viewBox="0 0 100 100">
+        <!-- Stem & Leaves -->
+        <path d="M50,90 Q48,65 50,55" stroke="#2e7d32" stroke-width="4" fill="none"/>
+        <path d="M50,75 Q35,70 30,78 Q42,85 50,75" fill="#4caf50"/>
+        <path d="M50,70 Q65,65 70,73 Q58,80 50,70" fill="#4caf50"/>
+        <!-- Petals -->
+        <g fill="#ffca28">
+          <ellipse cx="50" cy="20" rx="6" ry="14"/>
+          <ellipse cx="50" cy="80" rx="6" ry="14"/>
+          <ellipse cx="20" cy="50" rx="14" ry="6"/>
+          <ellipse cx="80" cy="50" rx="14" ry="6"/>
+          <ellipse cx="29" cy="29" rx="7" ry="14" transform="rotate(-45 29 29)"/>
+          <ellipse cx="71" cy="71" rx="7" ry="14" transform="rotate(-45 71 71)"/>
+          <ellipse cx="71" cy="29" rx="7" ry="14" transform="rotate(45 71 29)"/>
+          <ellipse cx="29" cy="71" rx="7" ry="14" transform="rotate(45 29 71)"/>
+        </g>
+        <!-- Center Face -->
+        <circle cx="50" cy="50" r="18" fill="#6d4c41"/>
+        <!-- Eyes & Smile -->
+        <circle cx="43" cy="47" r="2.5" fill="#fff"/>
+        <circle cx="57" cy="47" r="2.5" fill="#fff"/>
+        <circle cx="43" cy="47" r="1.2" fill="#000"/>
+        <circle cx="57" cy="47" r="1.2" fill="#000"/>
+        <path d="M44,53 Q50,58 56,53" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Cheeks -->
+        <circle cx="40" cy="52" r="2" fill="#ff8a80" opacity="0.6"/>
+        <circle cx="60" cy="52" r="2" fill="#ff8a80" opacity="0.6"/>
+      </svg>
+    </div>
+    <h2>Hey Beautiful ✨</h2>
+    <p>I don't know what kind of spell you cast, but between those gorgeous eyes and your beautiful hair, you make it completely impossible for me to focus on anything else when you're around.</p>
+    <button onclick="nextStep(2)">Next ❤️</button>
+  </div>
+
+  <!-- STEP 2: The Proposal (Cute Elephant) -->
+  <div id="step2" class="card hidden">
+    <div class="svg-container">
+      <svg class="bounce-dance" width="130" height="130" viewBox="0 0 100 100">
+        <!-- Ears -->
+        <circle cx="28" cy="45" r="18" fill="#b0bec5"/>
+        <circle cx="72" cy="45" r="18" fill="#b0bec5"/>
+        <circle cx="28" cy="45" r="11" fill="#cfd8dc"/>
+        <circle cx="72" cy="45" r="11" fill="#cfd8dc"/>
+        <!-- Head & Body -->
+        <ellipse cx="50" cy="65" rx="22" ry="18" fill="#90a4ae"/>
+        <circle cx="50" cy="48" r="22" fill="#b0bec5"/>
+        <!-- Eyes -->
+        <circle cx="42" cy="44" r="2.5" fill="#000"/>
+        <circle cx="58" cy="44" r="2.5" fill="#000"/>
+        <circle cx="43" cy="43" r="0.8" fill="#fff"/>
+        <circle cx="59" cy="43" r="0.8" fill="#fff"/>
+        <!-- Cheeks -->
+        <circle cx="36" cy="49" r="3" fill="#ffab91"/>
+        <circle cx="64" cy="49" r="3" fill="#ffab91"/>
+        <!-- Trunk -->
+        <path class="wave-trunk" d="M47,52 Q40,65 30,55 Q25,50 32,48" stroke="#b0bec5" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <!-- Heart above elephant -->
+        <path d="M50,18 C45,10 35,15 42,24 L50,30 L58,24 C65,15 55,10 50,18 Z" fill="#ff4081"/>
+      </svg>
+    </div>
+    <h2>Will you go on a virtual movie date with me? 🌹</h2>
+    <p>Grab your favorite drink/snack, get cozy, and let's hang out virtually!</p>
+    <div class="btn-container" id="proposalBtns">
+      <button id="yesBtn" onclick="nextStep(3)">YES! 💖</button>
+      
+      <!-- Elephant Pulling No Button with a Rope -->
+      <div id="noWrapper" onmouseover="moveNoButton()" onclick="moveNoButton()">
+        <span class="pulling-elephant">🐘</span>
+        <span class="rope">---🪢---</span>
+        <button id="noBtn">No 😜</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: "I Knew It!" + Pick Date/Time -->
+  <div id="step3" class="card hidden">
+    <div class="svg-container">
+      <svg class="bounce-dance" width="130" height="130" viewBox="0 0 100 100">
+        <!-- Bear Head -->
+        <circle cx="50" cy="50" r="30" fill="#a1887f"/>
+        <!-- Ears -->
+        <circle cx="28" cy="28" r="10" fill="#a1887f"/>
+        <circle cx="72" cy="28" r="10" fill="#a1887f"/>
+        <circle cx="28" cy="28" r="5" fill="#d7ccc8"/>
+        <circle cx="72" cy="28" r="5" fill="#d7ccc8"/>
+        <!-- Snout -->
+        <ellipse cx="50" cy="58" rx="12" ry="9" fill="#d7ccc8"/>
+        <ellipse cx="50" cy="54" rx="4" ry="3" fill="#4e342e"/>
+        <path d="M50,57 L50,61 M46,61 Q50,65 54,61" stroke="#4e342e" stroke-width="1.8" fill="none"/>
+        <!-- Eyes -->
+        <circle cx="38" cy="45" r="3" fill="#000"/>
+        <circle cx="62" cy="45" r="3" fill="#000"/>
+        <!-- Cheeks -->
+        <circle cx="33" cy="52" r="3.5" fill="#ff8a80" opacity="0.6"/>
+        <circle cx="67" cy="52" r="3.5" fill="#ff8a80" opacity="0.6"/>
+      </svg>
+    </div>
+    <h2>I knew you'd say yes! 😉🎉</h2>
+    <p>When are you free for our special date?</p>
+    <input type="datetime-local" id="dateTimePicker">
+    <button onclick="finishDateSelection()">Lock it in! 🔒</button>
+  </div>
+
+  <!-- STEP 4: Final Sweet Words -->
+  <div id="step4" class="card hidden">
+    <div class="svg-container">
+      <svg width="130" height="130" viewBox="0 0 100 100">
+        <!-- Giant Pulsing Heart -->
+        <path class="bounce-dance" d="M50,30 C35,10 10,25 25,50 L50,80 L75,50 C90,25 65,10 50,30 Z" fill="#ff416c"/>
+        <path d="M40,28 C35,22 28,25 32,33" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+      </svg>
+    </div>
+    <h2>It's a Date! 🥳❤️</h2>
+    <p id="finalMessage"></p>
+  </div>
+
+  <script>
+    let yesButtonScale = 1;
+
+    // Generate Floating Doodles
+    const doodleTypes = ['✨', '🌸', '💖', '⭐', '🎀', '🧸', '🌷', '🤍', '🌙'];
+    function createDoodles() {
+      const container = document.getElementById('doodleContainer');
+      const count = 20;
+
+      for (let i = 0; i < count; i++) {
+        const doodle = document.createElement('div');
+        doodle.classList.add('doodle');
+        doodle.innerText = doodleTypes[Math.floor(Math.random() * doodleTypes.length)];
+        
+        doodle.style.left = `${Math.random() * 100}vw`;
+        doodle.style.animationDuration = `${6 + Math.random() * 6}s`;
+        doodle.style.animationDelay = `${Math.random() * 8}s`;
+        doodle.style.fontSize = `${1.2 + Math.random() * 1}rem`;
+
+        container.appendChild(doodle);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', createDoodles);
+
+    function nextStep(stepNumber) {
+      document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+      document.getElementById(`step${stepNumber}`).classList.remove('hidden');
+
+      if (stepNumber === 2) {
+        const noWrapper = document.getElementById('noWrapper');
+        noWrapper.style.left = '60%';
+      }
+    }
+
+    function moveNoButton() {
+      const noWrapper = document.getElementById('noWrapper');
+      const yesBtn = document.getElementById('yesBtn');
+      const elephant = document.querySelector('.pulling-elephant');
+
+      // Expand Yes Button
+      yesButtonScale += 0.2;
+      yesBtn.style.transform = `scale(${yesButtonScale})`;
+
+      // Get current position
+      const rect = noWrapper.getBoundingClientRect();
+      const currentX = rect.left;
+
+      // Calculate target random position within screen bounds
+      const newX = Math.random() * (window.innerWidth - noWrapper.offsetWidth - 60);
+      const newY = Math.random() * (window.innerHeight - noWrapper.offsetHeight - 60);
+
+      // Determine walking direction (left or right)
+      if (newX > currentX) {
+        // Moving Right: Elephant leads on the right, pulling button on left
+        noWrapper.style.flexDirection = 'row-reverse';
+        elephant.style.setProperty('--dir', '-1'); // Face right
+      } else {
+        // Moving Left: Elephant leads on the left, pulling button on right
+        noWrapper.style.flexDirection = 'row';
+        elephant.style.setProperty('--dir', '1'); // Face left
+      }
+
+      // Add walking animation class
+      noWrapper.classList.add('is-walking');
+
+      // Trigger smooth gliding movement
+      noWrapper.style.position = 'fixed';
+      noWrapper.style.left = `${newX}px`;
+      noWrapper.style.top = `${newY}px`;
+
+      // Remove walking animation once elephant reaches its destination (0.8s)
+      setTimeout(() => {
+        noWrapper.classList.remove('is-walking');
+      }, 800);
+    }
+
+    function finishDateSelection() {
+      const selectedDateTime = document.getElementById('dateTimePicker').value;
+      if (!selectedDateTime) {
+        alert("Please pick a date and time so I can plan it! 😊");
+        return;
+      }
+
+      const formattedDate = new Date(selectedDateTime).toLocaleString('en-US', {
+        dateStyle: 'full',
+        timeStyle: 'short'
+      });
+
+      // Send email via Formspree to tijari7246@davopa.com
+      fetch("https://formspree.io/f/meeyynon", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          recipient: "tijari7246@davopa.com",
+          message: "She responded to your date invite! 🎉",
+          selected_date: formattedDate
+        })
+      });
+
+      // Display selected message on screen
+      document.getElementById('finalMessage').innerHTML = 
+        `Mark your calendar for <strong>${formattedDate}</strong>! <br><br>` +
+        `Now that it's set, I'm just genuinely excited to hang out with you. You're always such a comfort to be around. Can't wait for our date! ❤️`;
+
+      nextStep(4);
+    }
+  </script>
+</body>
+</html>
