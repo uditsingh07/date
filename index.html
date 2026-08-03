@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Special Question... 💖</title>
+  <!-- Heart Favicon to prevent 404 console warnings -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
   <style>
     * {
       box-sizing: border-box;
@@ -422,21 +424,26 @@
         timeStyle: 'short'
       });
 
-      // Send email via Formspree to tijari7246@davopa.com
-      fetch("https://formspree.io/f/xwvggybk", {
+      // 1. Send Formspree Request in background
+      fetch("https://formspree.io/f/meeyynon", {
         method: "POST",
         headers: { 
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          recipient: "neliya2024@copawoke.com",
+          recipient: "tijari7246@davopa.com",
           message: "She responded to your date invite! 🎉",
           selected_date: formattedDate
         })
       });
 
-      // Display selected message on screen
+      // 2. Open Her Mail Client Pre-filled directly to your email
+      const subject = encodeURIComponent("I set a date for us! 🎉");
+      const body = encodeURIComponent(`Hey! I selected this date and time for our virtual movie date: ${formattedDate} ❤️`);
+      window.location.href = `mailto:neliya2024@copawoke.com?subject=${subject}&body=${body}`;
+
+      // 3. Display final success screen
       document.getElementById('finalMessage').innerHTML = 
         `Mark your calendar for <strong>${formattedDate}</strong>! <br><br>` +
         `Now that it's set, I'm just genuinely excited to hang out with you. You're always such a comfort to be around. Can't wait for our date! ❤️`;
