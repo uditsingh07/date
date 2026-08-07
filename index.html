@@ -1,412 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Special Question... 💖</title>
-  <!-- Heart Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I am So, So Sorry!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #e0f2fe 100%);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
 
-    /* Floating Doodles Background */
-    .doodle-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
+        /* Header Message */
+        .header-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.92);
+            padding: 30px 50px;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            text-align: center;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            border: 3px solid #fef08a;
+            max-width: 90%;
+        }
 
-    .doodle {
-      position: absolute;
-      font-size: 1.5rem;
-      user-select: none;
-      animation: floatUp 8s linear infinite;
-      opacity: 0.6;
-    }
+        h1 {
+            color: #d97706;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(105vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-      }
-      90% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-10vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
+        p {
+            color: #4b5563;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
 
-    .card {
-      background: rgba(255, 255, 255, 0.98);
-      padding: 35px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      text-align: center;
-      max-width: 420px;
-      width: 90%;
-      position: relative;
-      z-index: 10;
-      animation: fadeIn 0.4s ease-in-out;
-    }
+        /* Container for Floating Minions */
+        #minion-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.92); }
-      to { opacity: 1; transform: scale(1); }
-    }
+        /* Minion Styling */
+        .minion {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            user-select: none;
+            animation: floatUp linear infinite;
+            will-change: transform;
+        }
 
-    h2 {
-      color: #ff4b2b;
-      margin-bottom: 15px;
-      font-size: 1.6rem;
-      font-weight: 700;
-    }
+        /* CSS-based Minion Illustration */
+        .minion-body {
+            position: relative;
+            width: 50px;
+            height: 75px;
+            background-color: #facc15; /* Minion Yellow */
+            border-radius: 25px 25px 15px 15px;
+            border: 2px solid #ca8a04;
+            box-shadow: inset -3px -3px 0px rgba(0,0,0,0.1);
+        }
 
-    p {
-      color: #333333;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
+        /* Goggles & Eye */
+        .goggles {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: #374151;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .btn-container {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 10px;
-      position: relative;
-      min-height: 60px;
-    }
+        .eye {
+            width: 22px;
+            height: 22px;
+            background: #ffffff;
+            border: 3px solid #9ca3af;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
 
-    button {
-      background: linear-gradient(45deg, #ff416c, #ff4b2b);
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 25px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(255, 65, 108, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+        .pupil {
+            width: 8px;
+            height: 8px;
+            background: #4b2e2b;
+            border-radius: 50%;
+            position: relative;
+        }
 
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(255, 65, 108, 0.4);
-    }
+        .pupil::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+        }
 
-    /* Pulling Elephant + Rope + No Button Wrapper */
-    #noWrapper {
-      display: inline-flex;
-      align-items: center;
-      position: absolute;
-      transition: left 0.8s cubic-bezier(0.25, 1, 0.5, 1), top 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-      z-index: 20;
-      cursor: pointer;
-    }
+        /* Sad Mouth */
+        .mouth {
+            position: absolute;
+            top: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 8px;
+            border-top: 2px solid #374151;
+            border-radius: 50% 50% 0 0;
+        }
 
-    #noBtn {
-      background: #718093;
-      box-shadow: none;
-      padding: 10px 20px;
-    }
+        /* Overalls */
+        .overalls {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 28px;
+            background-color: #2563eb; /* Denim Blue */
+            border-radius: 0 0 13px 13px;
+            border-top: 2px solid #1d4ed8;
+        }
 
-    .pulling-elephant {
-      font-size: 2.2rem;
-      user-select: none;
-      display: inline-block;
-      --dir: 1;
-      transform: scaleX(var(--dir));
-      transition: transform 0.2s ease;
-    }
+        .strap {
+            position: absolute;
+            top: -8px;
+            width: 8px;
+            height: 12px;
+            background-color: #2563eb;
+        }
+        .strap.left { left: 4px; transform: rotate(-15deg); }
+        .strap.right { right: 4px; transform: rotate(15deg); }
 
-    .is-walking .pulling-elephant {
-      animation: walkWaddle 0.2s infinite alternate ease-in-out;
-    }
+        /* Speech Bubble */
+        .speech-bubble {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #dc2626;
+            margin-bottom: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            border: 1px solid #fca5a5;
+        }
 
-    @keyframes walkWaddle {
-      0% { transform: scaleX(var(--dir)) translateY(0) rotate(-10deg); }
-      100% { transform: scaleX(var(--dir)) translateY(-6px) rotate(10deg); }
-    }
+        /* Flower Prop */
+        .flower {
+            position: absolute;
+            bottom: -5px;
+            right: -10px;
+            font-size: 20px;
+            animation: sway 1.5s ease-in-out infinite alternate;
+        }
 
-    .rope {
-      font-size: 0.9rem;
-      font-weight: bold;
-      color: #8d6e63;
-      margin: 0 -2px;
-      user-select: none;
-      letter-spacing: -2px;
-    }
+        /* Animations */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) scale(var(--scale));
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) scale(var(--scale));
+                opacity: 0;
+            }
+        }
 
-    #yesBtn {
-      position: relative;
-      z-index: 10;
-    }
-
-    input[type="datetime-local"] {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #ff416c;
-      border-radius: 10px;
-      font-size: 1rem;
-      margin-bottom: 20px;
-      outline: none;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .svg-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    /* SVG Animations */
-    .bounce-dance {
-      animation: dance 1.2s ease-in-out infinite alternate;
-      transform-origin: bottom center;
-    }
-
-    @keyframes dance {
-      0% { transform: rotate(-8deg) translateY(0); }
-      100% { transform: rotate(8deg) translateY(-8px); }
-    }
-
-    .wave-trunk {
-      animation: wave 1.5s ease-in-out infinite alternate;
-      transform-origin: 35px 55px;
-    }
-
-    @keyframes wave {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(-15deg); }
-    }
-  </style>
+        @keyframes sway {
+            from { transform: rotate(-10deg); }
+            to { transform: rotate(10deg); }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Floating Doodles Container -->
-  <div class="doodle-container" id="doodleContainer"></div>
-
-  <!-- STEP 1: Good Words (Dancing Sunflower) -->
-  <div id="step1" class="card">
-    <div class="svg-container">
-      <svg class="bounce-dance" width="130" height="130" viewBox="0 0 100 100">
-        <path d="M50,90 Q48,65 50,55" stroke="#2e7d32" stroke-width="4" fill="none"/>
-        <path d="M50,75 Q35,70 30,78 Q42,85 50,75" fill="#4caf50"/>
-        <path d="M50,70 Q65,65 70,73 Q58,80 50,70" fill="#4caf50"/>
-        <g fill="#ffca28">
-          <ellipse cx="50" cy="20" rx="6" ry="14"/>
-          <ellipse cx="50" cy="80" rx="6" ry="14"/>
-          <ellipse cx="20" cy="50" rx="14" ry="6"/>
-          <ellipse cx="80" cy="50" rx="14" ry="6"/>
-          <ellipse cx="29" cy="29" rx="7" ry="14" transform="rotate(-45 29 29)"/>
-          <ellipse cx="71" cy="71" rx="7" ry="14" transform="rotate(-45 71 71)"/>
-          <ellipse cx="71" cy="29" rx="7" ry="14" transform="rotate(45 71 29)"/>
-          <ellipse cx="29" cy="71" rx="7" ry="14" transform="rotate(45 29 71)"/>
-        </g>
-        <circle cx="50" cy="50" r="18" fill="#6d4c41"/>
-        <circle cx="43" cy="47" r="2.5" fill="#fff"/>
-        <circle cx="57" cy="47" r="2.5" fill="#fff"/>
-        <circle cx="43" cy="47" r="1.2" fill="#000"/>
-        <circle cx="57" cy="47" r="1.2" fill="#000"/>
-        <path d="M44,53 Q50,58 56,53" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <circle cx="40" cy="52" r="2" fill="#ff8a80" opacity="0.6"/>
-        <circle cx="60" cy="52" r="2" fill="#ff8a80" opacity="0.6"/>
-      </svg>
+    <div class="header-box">
+        <h1>I'm So Sorry! 💛</h1>
+        <p>Here are 100+ Minions bringing you flowers to ask for forgiveness!</p>
     </div>
-    <h2>Hey Beautiful ✨</h2>
-    <p>I don't know what kind of spell you cast, but between those gorgeous eyes and your beautiful hair, you make it completely impossible for me to focus on anything else when you're around.</p>
-    <button onclick="nextStep(2)">Next ❤️</button>
-  </div>
 
-  <!-- STEP 2: The Proposal (Cute Elephant) -->
-  <div id="step2" class="card hidden">
-    <div class="svg-container">
-      <svg class="bounce-dance" width="130" height="130" viewBox="0 0 100 100">
-        <circle cx="28" cy="45" r="18" fill="#b0bec5"/>
-        <circle cx="72" cy="45" r="18" fill="#b0bec5"/>
-        <circle cx="28" cy="45" r="11" fill="#cfd8dc"/>
-        <circle cx="72" cy="45" r="11" fill="#cfd8dc"/>
-        <ellipse cx="50" cy="65" rx="22" ry="18" fill="#90a4ae"/>
-        <circle cx="50" cy="48" r="22" fill="#b0bec5"/>
-        <circle cx="42" cy="44" r="2.5" fill="#000"/>
-        <circle cx="58" cy="44" r="2.5" fill="#000"/>
-        <circle cx="43" cy="43" r="0.8" fill="#fff"/>
-        <circle cx="59" cy="43" r="0.8" fill="#fff"/>
-        <circle cx="36" cy="49" r="3" fill="#ffab91"/>
-        <circle cx="64" cy="49" r="3" fill="#ffab91"/>
-        <path class="wave-trunk" d="M47,52 Q40,65 30,55 Q25,50 32,48" stroke="#b0bec5" stroke-width="7" fill="none" stroke-linecap="round"/>
-        <path d="M50,18 C45,10 35,15 42,24 L50,30 L58,24 C65,15 55,10 50,18 Z" fill="#ff4081"/>
-      </svg>
-    </div>
-    <h2>Will you go on a virtual movie date with me? 🌹</h2>
-    <p>Grab your favorite drink/snack, get cozy, and let's hang out virtually!</p>
-    <div class="btn-container" id="proposalBtns">
-      <button id="yesBtn" onclick="nextStep(3)">YES! 💖</button>
-      <div id="noWrapper" onmouseover="moveNoButton()" onclick="moveNoButton()">
-        <span class="pulling-elephant">🐘</span>
-        <span class="rope">---🪢---</span>
-        <button id="noBtn">No 😜</button>
-      </div>
-    </div>
-  </div>
+    <div id="minion-container"></div>
 
-  <!-- STEP 3: Pick Date/Time -->
-  <div id="step3" class="card hidden">
-    <div class="svg-container">
-      <svg class="bounce-dance" width="130" height="130" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="30" fill="#a1887f"/>
-        <circle cx="28" cy="28" r="10" fill="#a1887f"/>
-        <circle cx="72" cy="28" r="10" fill="#a1887f"/>
-        <circle cx="28" cy="28" r="5" fill="#d7ccc8"/>
-        <circle cx="72" cy="28" r="5" fill="#d7ccc8"/>
-        <ellipse cx="50" cy="58" rx="12" ry="9" fill="#d7ccc8"/>
-        <ellipse cx="50" cy="54" rx="4" ry="3" fill="#4e342e"/>
-        <path d="M50,57 L50,61 M46,61 Q50,65 54,61" stroke="#4e342e" stroke-width="1.8" fill="none"/>
-        <circle cx="38" cy="45" r="3" fill="#000"/>
-        <circle cx="62" cy="45" r="3" fill="#000"/>
-        <circle cx="33" cy="52" r="3.5" fill="#ff8a80" opacity="0.6"/>
-        <circle cx="67" cy="52" r="3.5" fill="#ff8a80" opacity="0.6"/>
-      </svg>
-    </div>
-    <h2>I knew you'd say yes! 😉🎉</h2>
-    <p>When are you free for our special date?</p>
-    <input type="datetime-local" id="dateTimePicker">
-    <button onclick="finishDateSelection()">Lock it in! 🔒</button>
-  </div>
+    <script>
+        const container = document.getElementById('minion-container');
+        const TOTAL_MINIONS = 110;
 
-  <!-- STEP 4: Final Screen -->
-  <div id="step4" class="card hidden">
-    <div class="svg-container">
-      <svg width="130" height="130" viewBox="0 0 100 100">
-        <path class="bounce-dance" d="M50,30 C35,10 10,25 25,50 L50,80 L75,50 C90,25 65,10 50,30 Z" fill="#ff416c"/>
-        <path d="M40,28 C35,22 28,25 32,33" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
-      </svg>
-    </div>
-    <h2>It's a Date! 🥳❤️</h2>
-    <p id="finalMessage"></p>
-  </div>
+        const sorryPhrases = [
+            "Sorry!", 
+            "So Sorry!", 
+            "Forgive me!", 
+            "Pleased forgive!", 
+            "Bello, Sorry!", 
+            "I'm sorry! 🌸", 
+            "Very sorry!"
+        ];
 
-  <script>
-    let yesButtonScale = 1;
+        function createMinion(id) {
+            const minion = document.createElement('div');
+            minion.className = 'minion';
 
-    const doodleTypes = ['✨', '🌸', '💖', '⭐', '🎀', '🧸', '🌷', '🤍', '🌙'];
-    function createDoodles() {
-      const container = document.getElementById('doodleContainer');
-      const count = 20;
+            // Randomize position, speed, size, and delay
+            const leftPos = Math.random() * 95; // 0% to 95% width
+            const duration = 7 + Math.random() * 8; // Float duration 7-15s
+            const delay = Math.random() * 12; // Staggered start times
+            const scale = 0.6 + Math.random() * 0.7; // Varying depth/size
+            const carriesFlower = Math.random() > 0.4; // 60% chance to carry flower
 
-      for (let i = 0; i < count; i++) {
-        const doodle = document.createElement('div');
-        doodle.classList.add('doodle');
-        doodle.innerText = doodleTypes[Math.floor(Math.random() * doodleTypes.length)];
-        
-        doodle.style.left = `${Math.random() * 100}vw`;
-        doodle.style.animationDuration = `${6 + Math.random() * 6}s`;
-        doodle.style.animationDelay = `${Math.random() * 8}s`;
-        doodle.style.fontSize = `${1.2 + Math.random() * 1}rem`;
+            minion.style.left = `${leftPos}%`;
+            minion.style.animationDuration = `${duration}s`;
+            minion.style.animationDelay = `${delay}s`;
+            minion.style.setProperty('--scale', scale);
 
-        container.appendChild(doodle);
-      }
-    }
-    window.addEventListener('DOMContentLoaded', createDoodles);
+            // Speech Bubble
+            const phrase = sorryPhrases[Math.floor(Math.random() * sorryPhrases.length)];
+            const bubble = document.createElement('div');
+            bubble.className = 'speech-bubble';
+            bubble.innerText = phrase;
+            minion.appendChild(bubble);
 
-    function nextStep(stepNumber) {
-      document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
-      document.getElementById(`step${stepNumber}`).classList.remove('hidden');
+            // Minion Body Construction
+            const body = document.createElement('div');
+            body.className = 'minion-body';
 
-      if (stepNumber === 2) {
-        const noWrapper = document.getElementById('noWrapper');
-        noWrapper.style.left = '60%';
-      }
-    }
+            // Goggles & Eye
+            const goggles = document.createElement('div');
+            goggles.className = 'goggles';
+            const eye = document.createElement('div');
+            eye.className = 'eye';
+            const pupil = document.createElement('div');
+            pupil.className = 'pupil';
+            eye.appendChild(pupil);
+            goggles.appendChild(eye);
+            body.appendChild(goggles);
 
-    function moveNoButton() {
-      const noWrapper = document.getElementById('noWrapper');
-      const yesBtn = document.getElementById('yesBtn');
-      const elephant = document.querySelector('.pulling-elephant');
+            // Sad Mouth
+            const mouth = document.createElement('div');
+            mouth.className = 'mouth';
+            body.appendChild(mouth);
 
-      yesButtonScale += 0.2;
-      yesBtn.style.transform = `scale(${yesButtonScale})`;
+            // Overalls
+            const overalls = document.createElement('div');
+            overalls.className = 'overalls';
+            const strapL = document.createElement('div');
+            strapL.className = 'strap left';
+            const strapR = document.createElement('div');
+            strapR.className = 'strap right';
+            overalls.appendChild(strapL);
+            overalls.appendChild(strapR);
+            body.appendChild(overalls);
 
-      const rect = noWrapper.getBoundingClientRect();
-      const currentX = rect.left;
+            // Add Flower if designated
+            if (carriesFlower) {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                // Pick random flower emoji
+                const flowers = ['🌸', '🌺', '🌹', '🌻', '🌷'];
+                flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+                body.appendChild(flower);
+            }
 
-      const newX = Math.random() * (window.innerWidth - noWrapper.offsetWidth - 60);
-      const newY = Math.random() * (window.innerHeight - noWrapper.offsetHeight - 60);
+            minion.appendChild(body);
+            container.appendChild(minion);
+        }
 
-      if (newX > currentX) {
-        noWrapper.style.flexDirection = 'row-reverse';
-        elephant.style.setProperty('--dir', '-1');
-      } else {
-        noWrapper.style.flexDirection = 'row';
-        elephant.style.setProperty('--dir', '1');
-      }
-
-      noWrapper.classList.add('is-walking');
-      noWrapper.style.position = 'fixed';
-      noWrapper.style.left = `${newX}px`;
-      noWrapper.style.top = `${newY}px`;
-
-      setTimeout(() => {
-        noWrapper.classList.remove('is-walking');
-      }, 800);
-    }
-
-    function finishDateSelection() {
-      const selectedDateTime = document.getElementById('dateTimePicker').value;
-      if (!selectedDateTime) {
-        alert("Please pick a date and time so I can plan it! 😊");
-        return;
-      }
-
-      const formattedDate = new Date(selectedDateTime).toLocaleString('en-US', {
-        dateStyle: 'full',
-        timeStyle: 'short'
-      });
-
-      // Silently post response directly into Google Sheets
-      fetch("https://script.google.com/macros/s/AKfycbzb81OlL5Ms70nEARPQIK2rjCVHFwCAIiZMddaXto6cb8i9I1fLXk8wYwNbADsqKAr1/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ selected_date: formattedDate })
-      });
-
-      // Display final success screen directly inside browser
-      document.getElementById('finalMessage').innerHTML = 
-        `Mark your calendar for <strong>${formattedDate}</strong>! <br><br>` +
-        `Now that it's set, I'm just genuinely excited to hang out with you. You're always such a comfort to be around. Can't wait for our date! ❤️`;
-
-      nextStep(4);
-    }
-  </script>
+        // Generate 100+ Minions dynamically
+        for (let i = 0; i < TOTAL_MINIONS; i++) {
+            createMinion(i);
+        }
+    </script>
 </body>
 </html>
